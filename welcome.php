@@ -129,7 +129,7 @@ if (!isset($_SESSION['profile'])) {
                             <!--begin::Row-->
                             <div class="row">
                                 <div class="card-title">
-                                    <h2 class="fw-bold">ข้อมูลผู้ชำระเงิน</h2>
+                                    <h2 c[lass="fw-bold">ข้อมูลผู้ชำระเงิน</h2>
                                 </div>
                             </div>
                             <!--end::Row-->
@@ -230,30 +230,26 @@ if (!isset($_SESSION['profile'])) {
                                 <?php
                                 include('connect.php');
                                 $shotdays = strtolower(substr(date("l"), 0, 2));
-                                $sql = "elect * from set_time where days = '" . $shotdays . "' and status ='active'" or die("Error:" . mysqli_error());
+                                $sql = "select * from set_time where days = '" . $shotdays . "' and status ='active'" or die("Error:" . mysqli_error($conn));
                                 $query = mysqli_query($conn, $sql);
                                 ?>
                                 <?php while ($result = mysqli_fetch_assoc($query)) {
-                                    $cerrenttime =  substr(date("H:00"),0,2);
-                                   if(strlen(substr($result['time'],0,1)) == 1){
-                                       $time =  "0".substr($result['time'],0,1);
-                                   }else{
-                                       $time =  substr($result['time'],0,2);
-                                   }
-                                   // echo $cerrenttime;
-                                    if($cerrenttime > $time){ ?>
-                                        <div class="d-flex flex-stack gap-5 mb-3">
+                                    $hour = 1;
+                                    $cerrenttime =  date("H:i");
+                                    $timestamp = strtotime($cerrenttime.'+'.$hour.' hour');
+                                    $time = date('H:i', $timestamp);
+                                    // echo $time;
+                                    $datatime = date("H:i",strtotime($result['time']));
+                                    if($time > $datatime) { ?>
+                                        <!-- <div class="d-flex flex-stack gap-5 mb-3">
                                             <button type="radio" disabled="disabled" class="btn btn-light-primary w-100" disdata-kt-docs-advanced-forms="interactive"><?= $result['time']; ?></button>
-                                        </div> 
-                                  
-                                    <?php } ?>
-                                    
-                                    <?php if($cerrenttime < $time){?>
+                                        </div>  -->
+                                    <?php }else{?>
                                         <div class="d-flex flex-stack gap-5 mb-3">
                                             <button type="radio" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive"><?= $result['time']; ?></button>
                                         </div>
+                                       <?php  }?>
                                    <?php  }?>
-                               <?php  } ?>
                                 
                                 
                                 <input type="hidden" class="bookingtime form-control form-control-solid" placeholder="Enter Amount" name="bookingtime" value="" />
