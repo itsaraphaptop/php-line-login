@@ -2,9 +2,9 @@
 class LineLogin
 {
     #### change your id
-    private const CLIENT_ID = '#CLIENT_ID';
-    private const CLIENT_SECRET = '#CLIENT_SECRET';
-    private const REDIRECT_URL = '#REDIRECT_URL';
+    private const CLIENT_ID = '1660831051';
+    private const CLIENT_SECRET = '9326fc40b4df2842aae503252c3aa9a6';
+    private const REDIRECT_URL = 'https://app.mesukdee.com/aof/callback.php';
 
     private const AUTH_URL = 'https://access.line.me/oauth2/v2.1/authorize';
     private const PROFILE_URL = 'https://api.line.me/v2/profile';
@@ -70,7 +70,8 @@ class LineLogin
             'refresh_token' => $token->refresh_token,
             'name' => '',
             'picture' => '',
-            'email' => ''
+            'email' => '',
+            'sub' => ''
         );
 
         if (count($payload) == 3) {
@@ -83,6 +84,9 @@ class LineLogin
 
             if (isset($data->email))
                 $ret['email'] = $data->email;
+
+            if (isset($data->sub))
+                $ret['sub'] = $data->sub;
         }
         return (object) $ret;
     }
