@@ -83,7 +83,7 @@
 																<!--begin::Dates-->
 																<?php 
 																	include('connect.php');
-																	$sql = "select * from appointments where description = '" . $_SESSION['profile']->email ."'" or die("Error:" . mysqli_error());
+																	$sql = "select * from appointments where description = '" . $_SESSION['profile']->email ."'" or die("Error:" . mysqli_error($conn));
 																	$query = mysqli_query($conn, $sql);
 																?>
 																<?php while ($result = mysqli_fetch_assoc($query)) {?>
