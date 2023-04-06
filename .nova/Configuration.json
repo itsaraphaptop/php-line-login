@@ -1,0 +1,6 @@
+{
+  "workspace.preview_root" : ".",
+  "workspace.preview_server_allow_external" : false,
+  "workspace.preview_type" : "custom",
+  "workspace.preview_url" : "https:\/\/app.mesukdee.com\/aof"
+}
